@@ -1,0 +1,7 @@
+#import user.graphql
+#import post.graphql
+#import comment.graphql
+
+type Query {
+  me: User @auth
+}

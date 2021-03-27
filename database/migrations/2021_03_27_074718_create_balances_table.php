@@ -16,7 +16,7 @@ class CreateBalancesTable extends Migration
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('count')->default(0);
-            $table->unsignedTinyInteger('type')->default(0);
+            $table->unsignedInteger('count_promo')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

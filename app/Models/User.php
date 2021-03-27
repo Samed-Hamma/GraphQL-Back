@@ -32,6 +32,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $with = ['balances'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -47,5 +48,21 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+
+    public function balances() {
+        return $this->hasMany(Balance::class);
+    }
+
+    public function getTotalBalanceCountAttribute() {
+        return $this->balances->pluck('count')->sum();
+    }
+
+    public function getTotalBalanceCountPromoAttribute() {
+        return $this->balances->pluck('count_promo')->sum();
+    }
+
+    public function getTotalBalanceAttribute() {
+        return $this->total_balance_count + $this->total_balance_count_promo;
     }
 }

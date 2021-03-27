@@ -18,6 +18,7 @@ class CreateRefreshesTable extends Migration
             $table->datetime('available_at');
             $table->foreignId('ad_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->datetime('deleted_at')->nullable();
         });
     }
 

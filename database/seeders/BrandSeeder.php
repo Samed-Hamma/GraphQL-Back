@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class CategorySeeder extends Seeder
+class BrandSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,9 +16,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->truncate();
-        $filename = 'database/seeders/data/categories.json';
+        DB::table('brands')->truncate();
+        $filename = 'database/seeders/data/brands.json';
         $content = json_decode(File::get($filename), true);
-        Category::insert($content);
+        $data = [];
+        foreach($content as $c) {
+            unset($c['types']);
+            array_push($data, $c);
+        }
+        Brand::insert($data);
     }
 }

@@ -19,6 +19,7 @@ class CreateBalancesTable extends Migration
             $table->unsignedInteger('count_promo')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->datetime('deleted_at')->nullable();
         });
     }
 
